@@ -1,13 +1,4 @@
-const titles = [
-  'Alipay',
-  'Angular',
-  'Ant Design',
-  'Ant Design Pro',
-  'Bootstrap',
-  'React',
-  'Vue',
-  'Webpack',
-];
+const titles = ['王二小', '张三', '李苏', '钱端', '卜佳凹', '怀毕塞', '都埠甘', '白派克'];
 const avatars = [
   'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png', // Alipay
   'https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png', // Angular
@@ -43,6 +34,16 @@ const user = [
   '谭小仪',
   '仲尼',
 ];
+const fart = [
+  '非常感谢医生，回复的速度真的很快！而且很详细。',
+  '耐心、专业！',
+  '医生很有责任心，解答很到位。',
+  '无比赞，谢谢医生的解惑。',
+  '谢谢医生，祝医生新年快乐！',
+  '专业详实的解答，多谢医生',
+  '谢谢医生！',
+  '医生很厉害，但是我还有一些不明白的地方，希望下次还能请教医生~',
+];
 
 function fakeList(count) {
   const list = [];
@@ -68,8 +69,7 @@ function fakeList(count) {
       star: Math.ceil(Math.random() * 100) + 100,
       like: Math.ceil(Math.random() * 100) + 100,
       message: Math.ceil(Math.random() * 10) + 10,
-      content:
-        '段落示意：蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。蚂蚁金服设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态，提供跨越设计与开发的体验解决方案。',
+      content: fart[i % fart.length],
       members: [
         {
           avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png',

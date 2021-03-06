@@ -85,38 +85,41 @@ const Applications = (props) => {
         xxl: 4,
       }}
       dataSource={list}
-      renderItem={(item) => (
-        <List.Item key={item.id}>
-          <Card
-            hoverable
-            bodyStyle={{
-              paddingBottom: 20,
-            }}
-            actions={[
-              <Tooltip key="download" title="下载">
-                <DownloadOutlined />
-              </Tooltip>,
-              <Tooltip title="编辑" key="edit">
-                <EditOutlined />
-              </Tooltip>,
-              <Tooltip title="分享" key="share">
-                <ShareAltOutlined />
-              </Tooltip>,
-              <Dropdown overlay={itemMenu} key="ellipsis">
-                <EllipsisOutlined />
-              </Dropdown>,
-            ]}
-          >
-            <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
-            <div className={stylesApplications.cardItemContent}>
-              <CardInfo
-                activeUser={formatWan(item.activeUser)}
-                newUser={numeral(item.newUser).format('0,0')}
-              />
-            </div>
-          </Card>
-        </List.Item>
-      )}
+      renderItem={(item) => {
+        console.log(props);
+        return (
+          <List.Item key={item.id}>
+            <Card
+              hoverable
+              bodyStyle={{
+                paddingBottom: 20,
+              }}
+              actions={[
+                <Tooltip key="download" title="下载">
+                  <DownloadOutlined />
+                </Tooltip>,
+                <Tooltip title="编辑" key="edit">
+                  <EditOutlined />
+                </Tooltip>,
+                <Tooltip title="分享" key="share">
+                  <ShareAltOutlined />
+                </Tooltip>,
+                <Dropdown overlay={itemMenu} key="ellipsis">
+                  <EllipsisOutlined />
+                </Dropdown>,
+              ]}
+            >
+              <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
+              <div className={stylesApplications.cardItemContent}>
+                <CardInfo
+                  activeUser={formatWan(item.activeUser)}
+                  newUser={numeral(item.newUser).format('0,0')}
+                />
+              </div>
+            </Card>
+          </List.Item>
+        );
+      }}
     />
   );
 };

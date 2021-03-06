@@ -12,7 +12,7 @@ const operationTabList = [
     key: 'articles',
     tab: (
       <span>
-        文章{' '}
+        评价{' '}
         <span
           style={{
             fontSize: 14,
@@ -27,7 +27,7 @@ const operationTabList = [
     key: 'applications',
     tab: (
       <span>
-        应用{' '}
+        候诊{' '}
         <span
           style={{
             fontSize: 14,
@@ -38,21 +38,21 @@ const operationTabList = [
       </span>
     ),
   },
-  {
-    key: 'projects',
-    tab: (
-      <span>
-        项目{' '}
-        <span
-          style={{
-            fontSize: 14,
-          }}
-        >
-          (8)
-        </span>
-      </span>
-    ),
-  },
+  // {
+  //   key: 'projects',
+  //   tab: (
+  //     <span>
+  //       项目{' '}
+  //       <span
+  //         style={{
+  //           fontSize: 14,
+  //         }}
+  //       >
+  //         (8)
+  //       </span>
+  //     </span>
+  //   ),
+  // },
 ];
 
 const TagList = ({ tags }) => {

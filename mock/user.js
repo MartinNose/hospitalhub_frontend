@@ -19,8 +19,8 @@ export default {
     userid: '00000001',
     email: 'antdesign@alipay.com',
     signature: '海纳百川，有容乃大',
-    title: '交互专家',
-    group: '蚂蚁集团－某某某事业群－某某平台部－某某技术部－UED',
+    title: '主治医生',
+    group: '浙江大学第一人民医院骨科',
     tags: [
       {
         key: '0',
@@ -32,18 +32,14 @@ export default {
       },
       {
         key: '2',
-        label: '辣~',
+        label: '专业',
       },
       {
         key: '3',
-        label: '大长腿',
+        label: '经验丰富',
       },
       {
         key: '4',
-        label: '川妹子',
-      },
-      {
-        key: '5',
         label: '海纳百川',
       },
     ],
