@@ -1,6 +1,6 @@
 import { queryCurrent, queryFakeList } from './service';
 const Model = {
-  namespace: 'accountAndcenter',
+  namespace: 'accountAndcenterAnddoctor',
   state: {
     currentUser: {},
     list: [],

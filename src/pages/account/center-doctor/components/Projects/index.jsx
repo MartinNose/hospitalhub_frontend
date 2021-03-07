@@ -46,6 +46,6 @@ const Projects = (props) => {
   );
 };
 
-export default connect(({ accountAndcenter }) => ({
-  list: accountAndcenter.list,
+export default connect(({ accountAndcenterAnddoctor }) => ({
+  list: accountAndcenterAnddoctor.list,
 }))(Projects);

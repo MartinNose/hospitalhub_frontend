@@ -12,22 +12,7 @@ const operationTabList = [
     key: 'articles',
     tab: (
       <span>
-        评价{' '}
-        <span
-          style={{
-            fontSize: 14,
-          }}
-        >
-          (8)
-        </span>
-      </span>
-    ),
-  },
-  {
-    key: 'applications',
-    tab: (
-      <span>
-        候诊{' '}
+        历史订单{' '}
         <span
           style={{
             fontSize: 14,
@@ -128,8 +113,8 @@ const TagList = ({ tags }) => {
 
 class Center extends Component {
   // static getDerivedStateFromProps(
-  //   props: accountAndcenterProps,
-  //   state: accountAndcenterState,
+  //   props: accountAndcenterAndpatientProps,
+  //   state: accountAndcenterAndpatientState,
   // ) {
   //   const { match, location } = props;
   //   const { tabKey } = state;
@@ -150,10 +135,10 @@ class Center extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'accountAndcenter/fetchCurrent',
+      type: 'accountAndcenterAndpatient/fetchCurrent',
     });
     dispatch({
-      type: 'accountAndcenter/fetch',
+      type: 'accountAndcenterAndpatient/fetch',
     });
   }
 
@@ -292,7 +277,7 @@ class Center extends Component {
   }
 }
 
-export default connect(({ loading, accountAndcenter }) => ({
-  currentUser: accountAndcenter.currentUser,
-  currentUserLoading: loading.effects['accountAndcenter/fetchCurrent'],
+export default connect(({ loading, accountAndcenterAndpatient }) => ({
+  currentUser: accountAndcenterAndpatient.currentUser,
+  currentUserLoading: loading.effects['accountAndcenterAndpatient/fetchCurrent'],
 }))(Center);

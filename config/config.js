@@ -75,13 +75,13 @@ export default defineConfig({
               path: '/hospitalList',
               icon: 'table',
               name: '医院列表',
-              component: './list/card-list',
+              component: './hospital-list',
             },
             {
               path: '/hospital',
               icon: 'profile',
               name: '医院详情',
-              component: './list/basic-list',
+              component: './hospital',
             },
             {
               name: 'account',
@@ -95,8 +95,16 @@ export default defineConfig({
                 {
                   name: 'center',
                   icon: 'smile',
-                  path: '/account/center',
-                  component: './account/center',
+                  path: '/account/center-patient',
+                  authority: ['user'],
+                  component: './account/center-patient',
+                },
+                {
+                  name: 'center',
+                  icon: 'smile',
+                  path: '/account/center-doctor',
+                  authority: ['admin'],
+                  component: './account/center-doctor',
                 },
                 {
                   name: 'settings',
@@ -111,11 +119,16 @@ export default defineConfig({
                   path: '/account/bench',
                   component: './dashboard/workplace',
                 },
+                {
+                  autority: ['admin'],
+                  path: '/account/diagnosis',
+                  component: './form/basic-form',
+                },
               ],
             },
             {
               name: '参考页面',
-              icon: 'editor',
+              icon: 'highlight',
               path: '/',
               routes: [
                 {
