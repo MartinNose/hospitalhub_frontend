@@ -1,3 +1,5 @@
+import request from 'umi-request';
+
 const waitTime = (time = 100) => {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -80,42 +82,62 @@ export default {
       address: 'Sidney No. 1 Lake Park',
     },
   ],
-  'POST /api/login/account': async (req, res) => {
+  'POST /login': async (req, res) => {
+    // debugger
+    // console.log('post /api/login/account')
     const { password, userName, type } = req.body;
-    await waitTime(2000);
+    console.log(req);
+    // console.log(req)
+    // await waitTime(2000);
+    //
+    // if (password === 'ant.design' && userName === 'admin') {
+    //   res.send({
+    //     status: 'ok',
+    //     type,
+    //     currentAuthority: 'admin',
+    //   });
+    //   return;
+    // }
+    //
+    // if (password === 'ant.design' && userName === 'user') {
+    //   res.send({
+    //     status: 'ok',
+    //     type,
+    //     currentAuthority: 'user',
+    //   });
+    //   return;
+    // }
+    //
+    // if (type === 'mobile') {
+    //   res.send({
+    //     status: 'ok',
+    //     type,
+    //     currentAuthority: 'admin',
+    //   });
+    //   return;
+    // }
+    //
+    // res.send({
+    //   status: 'error',
+    //   type,
+    //   currentAuthority: 'guest',
+    // });
 
-    if (password === 'ant.design' && userName === 'admin') {
-      res.send({
-        status: 'ok',
-        type,
-        currentAuthority: 'admin',
-      });
-      return;
-    }
-
-    if (password === 'ant.design' && userName === 'user') {
-      res.send({
-        status: 'ok',
-        type,
-        currentAuthority: 'user',
-      });
-      return;
-    }
-
-    if (type === 'mobile') {
-      res.send({
-        status: 'ok',
-        type,
-        currentAuthority: 'admin',
-      });
-      return;
-    }
-
-    res.send({
-      status: 'error',
-      type,
-      currentAuthority: 'guest',
-    });
+    console.log('start post');
+    // await request('47.111.80.33:9800/login', {
+    //   method:'POST',
+    //   data: {'accountId': userName, 'encodedPassword': password},
+    //   headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    // })
+    //   .then((res) => res.json()).then((res) => {
+    //     console.log(res);
+    //     res.send({
+    //       status: 'ok',
+    //       type,
+    //       currentAuthority: 'admin',
+    //     });
+    //   }).catch((err) => console.log(err))
+    console.log('end of post');
   },
   'POST /api/register': (req, res) => {
     res.send({
