@@ -6,6 +6,7 @@ import ArticleListContent from './components/ArticleListContent';
 import StandardFormRow from './components/StandardFormRow';
 import TagSelect from './components/TagSelect';
 import styles from './style.less';
+import Avatar from 'antd/lib/avatar/avatar';
 const { Option } = Select;
 const FormItem = Form.Item;
 const pageSize = 5;
@@ -251,21 +252,29 @@ const HospitalList = ({ dispatch, hospitalList: { list }, loading }) => {
                 <IconText key="like" type="like-o" text={item.like} />,
                 <IconText key="message" type="message" text={item.message} />,
               ]}
-              extra={<div className={styles.listItemExtra} />}
+              extra={
+                <img
+                  style={{
+                    objectFit: 'cover',
+                    width: '350px',
+                    height: '200px',
+                    overflow: 'hidden',
+                  }}
+                  src={
+                    item.hospitalUrl
+                      ? item.hospitalUrl
+                      : 'https://www.healthcareitnews.com/sites/hitn/files/120319%20CaroMont%20Regional%20Medical%20Center%20712.jpg'
+                  }
+                ></img>
+              }
             >
               <List.Item.Meta
                 title={
-                  <a className={styles.listItemMetaTitle} href={item.href}>
-                    {item.title}
+                  <a className={styles.listItemMetaTitle} href={'/hospital/?id=' + item.hospitalId}>
+                    {item.hospitalName}
                   </a>
                 }
-                description={
-                  <span>
-                    <Tag>Ant Design</Tag>
-                    <Tag>设计语言</Tag>
-                    <Tag>蚂蚁金服</Tag>
-                  </span>
-                }
+                description={<span>{item.hospitalAddress}</span>}
               />
             </List.Item>
           )}

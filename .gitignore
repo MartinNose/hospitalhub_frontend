@@ -38,3 +38,6 @@ screenshot
 .eslintcache
 
 build
+*\ 2.js
+*\ 2.jsx
+*\ 2.less
