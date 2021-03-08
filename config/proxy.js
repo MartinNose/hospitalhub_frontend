@@ -8,28 +8,28 @@
 export default {
   dev: {
     '/api/': {
-      target: 'https://preview.pro.ant.design',
+      target: 'http://47.111.80.33:9800',
       changeOrigin: true,
       pathRewrite: {
-        '^': '',
+        '^/api/': '',
       },
     },
   },
   test: {
     '/api/': {
-      target: 'https://preview.pro.ant.design',
+      target: 'http://47.111.80.33:9800',
       changeOrigin: true,
       pathRewrite: {
-        '^': '',
+        '^/api/': '',
       },
     },
   },
   pre: {
     '/api/': {
-      target: 'your pre url',
+      target: 'http://47.111.80.33:9800',
       changeOrigin: true,
       pathRewrite: {
-        '^': '',
+        '^/api/': '',
       },
     },
   },
