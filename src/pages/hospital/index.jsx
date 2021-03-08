@@ -65,11 +65,13 @@ export const BasicList = (props) => {
   const [done, setDone] = useState(false);
   const [visible, setVisible] = useState(false);
   const [current, setCurrent] = useState(undefined);
+
+  const urlParams = new URLSearchParams(window.location.search);
   useEffect(() => {
     dispatch({
       type: 'hospital/fetch',
       payload: {
-        count: 5,
+        id: urlParams.get('id'),
       },
     });
   }, [1]);
