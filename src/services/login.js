@@ -2,6 +2,7 @@ import request from '@/utils/request';
 import qs from 'qs';
 // import baseUrl from '../../config/config.js'
 const baseUrl = 'http://47.111.80.33:9800';
+export { baseUrl };
 export async function AccountLogin(params) {
   // console.log('fakeAccountLogin')
   // console.log(params)

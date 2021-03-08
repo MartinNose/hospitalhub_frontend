@@ -21,31 +21,31 @@ const Model = {
       }); // Login successfully
       window.localStorage['token'] = response['data'];
       // console.log(response)
-      // if (response.status === 'ok') {
-      //   console.log(response)
-      //   const urlParams = new URL(window.location.href);
-      //   const params = getPageQuery();
-      //
-      //   message.success('🎉 🎉 🎉  登录成功！');
-      //   let { redirect } = params;
-      //
-      //   if (redirect) {
-      //     const redirectUrlParams = new URL(redirect);
-      //
-      //     if (redirectUrlParams.origin === urlParams.origin) {
-      //       redirect = redirect.substr(urlParams.origin.length);
-      //
-      //       if (redirect.match(/^\/.*#/)) {
-      //         redirect = redirect.substr(redirect.indexOf('#') + 1);
-      //       }
-      //     } else {x``
-      //       window.location.href = '/';
-      //       return;
-      //     }
-      //   }
-      //
-      //   history.replace(redirect || '/');
-      // }
+      console.log(response);
+      if (response.status === 'success') {
+        const urlParams = new URL(window.location.href);
+        const params = getPageQuery();
+        message.success('🎉 🎉 🎉  登录成功！');
+        let { redirect } = params;
+
+        if (redirect) {
+          const redirectUrlParams = new URL(redirect);
+
+          if (redirectUrlParams.origin === urlParams.origin) {
+            redirect = redirect.substr(urlParams.origin.length);
+
+            if (redirect.match(/^\/.*#/)) {
+              redirect = redirect.substr(redirect.indexOf('#') + 1);
+            }
+          } else {
+            x``;
+            window.location.href = '/';
+            return;
+          }
+        }
+
+        history.replace(redirect || '/');
+      }
     },
 
     logout() {
