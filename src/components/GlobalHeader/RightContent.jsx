@@ -1,4 +1,4 @@
-import { Tooltip, Tag, Modal } from 'antd';
+import { Tooltip, Tag, Modal, Divider, Typography } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import React, { useState } from 'react';
 import { connect, SelectLang } from 'umi';
@@ -7,6 +7,8 @@ import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
 import NoticeIconView from './NoticeIconView';
 import qs from 'qs';
+import Paragraph from 'antd/es/typography/Paragraph';
+import Title from 'antd/es/typography/Title';
 const ENVTagColor = {
   dev: 'orange',
   test: 'green',
@@ -16,7 +18,11 @@ const ENVTagColor = {
 const GlobalHeaderRight = (props) => {
   const { theme, layout } = props;
   let className = styles.right;
-  const [isModalVisible, setIsModalVisible, diagnosis_res, detailed_symptom] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [detailedSymptom, setDetailedSymptom] = useState(false);
+  const [possibleCauses, setPossibleCauses] = useState(false);
+  const [treatmentAdvice, setTreatmentAdvice] = useState(false);
+  const [result, setResult] = useState(false);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -45,7 +51,12 @@ const GlobalHeaderRight = (props) => {
             body: qs.stringify({ symptom_discription: value }),
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           }).then((res) => res.json());
-          console.log(res);
+          setDetailedSymptom(res['more_symptoms']);
+          setPossibleCauses(res['possible_causes']);
+          setTreatmentAdvice(res['treatment_advice']);
+          setResult(res['result']);
+          showModal();
+          // console.log(this.state)
         }}
         // options={[
         //   {
@@ -76,9 +87,23 @@ const GlobalHeaderRight = (props) => {
         </span>
       )}
       <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-        <h3>诊断结果</h3>
-        <p></p>
-        <p></p>
+        <Typography>
+          <Title>诊断结果</Title>
+          <Paragraph>{result}</Paragraph>
+        </Typography>
+        <Divider></Divider>
+        <Typography>
+          <Title>病症分析</Title>
+          <Paragraph>{detailedSymptom}</Paragraph>
+        </Typography>
+        <Typography>
+          <Title>常见病因</Title>
+          <Paragraph>{possibleCauses}</Paragraph>
+        </Typography>
+        <Typography>
+          <Title>治疗方案</Title>
+          <Paragraph>{treatmentAdvice}</Paragraph>
+        </Typography>
       </Modal>
     </div>
   );
