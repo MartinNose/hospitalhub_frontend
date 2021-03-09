@@ -1,25 +1,16 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { DownOutlined, PlusOutlined } from '@ant-design/icons';
-import {
-  Avatar,
-  Button,
-  Card,
-  Col,
-  Dropdown,
-  Input,
-  List,
-  Menu,
-  Modal,
-  Progress,
-  Radio,
-  Row,
-} from 'antd';
+import { Card, Col, Form, List, Row, Select, Tag } from 'antd';
+import StandardFormRow from './components/StandardFormRow';
+import { Avatar, Button, Dropdown, Input, Menu, Modal, Progress, Radio } from 'antd';
 import { findDOMNode } from 'react-dom';
 import { PageContainer } from '@ant-design/pro-layout';
 import { connect } from 'umi';
 import moment from 'moment';
 import OperationModal from './components/OperationModal';
 import styles from './style.less';
+import TagSelect from './components/TagSelect';
+const FormItem = Form.Item;
 const RadioButton = Radio.Button;
 const RadioGroup = Radio.Group;
 const { Search } = Input;
@@ -57,21 +48,24 @@ const ListContent = ({ data: { owner, createdAt, percent, status } }) => (
 
 export const BasicList = (props) => {
   const addBtn = useRef(null);
+  const [form] = Form.useForm();
   const {
     loading,
     dispatch,
-    hospital: { list },
+    hospital: { hosInfo, filter, regRes },
   } = props;
   const [done, setDone] = useState(false);
   const [visible, setVisible] = useState(false);
   const [current, setCurrent] = useState(undefined);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+  const [modalText, setModalText] = useState('确定要预约吗？');
 
   const urlParams = new URLSearchParams(window.location.search);
   useEffect(() => {
     dispatch({
       type: 'hospital/fetch',
       payload: {
-        id: urlParams.get('id'),
+        id: urlParams.get('id') || 1,
       },
     });
   }, [1]);
@@ -87,9 +81,30 @@ export const BasicList = (props) => {
     setCurrent(undefined);
   };
 
+  const handleOk = async () => {
+    if (done) {
+      setDone(false);
+      setVisible(false);
+      setModalText('确定预约？');
+      return;
+    }
+
+    setConfirmLoading(true);
+    await dispatch({
+      type: 'hospital/submit',
+      payload: {
+        doctor: current,
+      },
+    });
+    setConfirmLoading(false);
+    setModalText('预约成功');
+    setDone(true);
+  };
+
   const showEditModal = (item) => {
     setVisible(true);
     setCurrent(item);
+    console.log(current);
   };
 
   const deleteItem = (id) => {
@@ -155,7 +170,6 @@ export const BasicList = (props) => {
   };
 
   const handleCancel = () => {
-    setAddBtnblur();
     setVisible(false);
   };
 
@@ -170,6 +184,20 @@ export const BasicList = (props) => {
         ...values,
       },
     });
+  };
+
+  const formItemLayout = {
+    wrapperCol: {
+      xs: {
+        span: 24,
+      },
+      sm: {
+        span: 24,
+      },
+      md: {
+        span: 12,
+      },
+    },
   };
 
   return (
@@ -202,67 +230,118 @@ export const BasicList = (props) => {
             }}
             extra={extraContent}
           >
-            {/* <Button
-              type="dashed"
-              style={{
-                width: '100%',
-                marginBottom: 8,
-              }}
-              onClick={showModal}
-              ref={addBtn}
-            >
-              <PlusOutlined />
-              添加
-            </Button> */}
+            <Card bordered={false}>
+              <Form
+                layout="inline"
+                form={form}
+                initialValues={{
+                  owner: ['wjh', 'zxx'],
+                }}
+                onValuesChange={(value) => {
+                  dispatch({
+                    type: 'hospital/select',
+                    payload: value,
+                  });
+                }}
+              >
+                <StandardFormRow
+                  title="所属类目"
+                  block
+                  style={{
+                    paddingBottom: 11,
+                  }}
+                >
+                  <FormItem name="category">
+                    <TagSelect>
+                      {hosInfo.map((dep) => (
+                        <TagSelect.Option value={dep.departmentName}>
+                          {dep.departmentName}
+                        </TagSelect.Option>
+                      ))}
+                    </TagSelect>
+                  </FormItem>
+                </StandardFormRow>
+                <StandardFormRow title="其它选项" grid last>
+                  <Row gutter={16}>
+                    <Col xl={8} lg={10} md={12} sm={24} xs={24}>
+                      <FormItem {...formItemLayout} label="活跃用户" name="user">
+                        <Select
+                          placeholder="不限"
+                          style={{
+                            maxWidth: 200,
+                            width: '100%',
+                          }}
+                        >
+                          <Option value="lisa">李三</Option>
+                        </Select>
+                      </FormItem>
+                    </Col>
+                    <Col xl={8} lg={10} md={12} sm={24} xs={24}>
+                      <FormItem {...formItemLayout} label="好评度" name="rate">
+                        <Select
+                          placeholder="不限"
+                          style={{
+                            maxWidth: 200,
+                            width: '100%',
+                          }}
+                        >
+                          <Option value="good">优秀</Option>
+                        </Select>
+                      </FormItem>
+                    </Col>
+                  </Row>
+                </StandardFormRow>
+              </Form>
+            </Card>
 
             <List
               size="large"
               rowKey="id"
               loading={loading}
               pagination={paginationProps}
-              dataSource={list}
-              renderItem={(item) => (
-                <List.Item
-                  actions={[
-                    <a
-                      key="edit"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        showEditModal(item);
-                      }}
-                    >
-                      编辑
-                    </a>,
-                    <MoreBtn key="more" item={item} />,
-                  ]}
-                >
-                  <List.Item.Meta
-                    avatar={
-                      <Avatar
-                        src="https://cdn.iconscout.com/icon/free/png-256/consult-doctor-1901789-1607988.png"
-                        shape="square"
-                        size="large"
-                      />
-                    }
-                    title={<a href={item.href}>{item.title}</a>}
-                    description={item.subDescription}
-                  />
-                  <ListContent data={item} />
-                </List.Item>
-              )}
+              dataSource={hosInfo.filter((item) => {
+                if (filter.length === 0) return true;
+                return filter.includes(item.departmentName);
+              })}
+              renderItem={(dep) =>
+                dep.doctorModelList.map((item) => (
+                  <List.Item
+                    actions={[
+                      <a
+                        key="edit"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          showEditModal(item);
+                        }}
+                      >
+                        预约
+                      </a>,
+                      <MoreBtn key="more" item={item} />,
+                    ]}
+                  >
+                    <List.Item.Meta
+                      avatar={<Avatar src={item.portraitUrl} shape="square" size="large" />}
+                      title={<a href={item.href}>{item.trueName}</a>}
+                      description={item.experience}
+                    />
+                    <ListContent data={item} />
+                  </List.Item>
+                ))
+              }
             />
           </Card>
         </div>
       </PageContainer>
 
-      <OperationModal
-        done={done}
-        current={current}
+      <Modal
+        title="Title"
         visible={visible}
-        onDone={handleDone}
+        onOk={handleOk}
+        confirmLoading={confirmLoading}
         onCancel={handleCancel}
-        onSubmit={handleSubmit}
-      />
+      >
+        <p>{modalText}</p>
+      </Modal>
     </div>
   );
 };

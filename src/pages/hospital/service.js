@@ -38,3 +38,20 @@ export async function updateFakeList(params) {
     data: { ...restParams, method: 'update' },
   });
 }
+
+export async function registration(params) {
+  console.log(params);
+  const raw = await fetch('http://47.111.80.33:9800/patient/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      token: localStorage.token,
+      doctorId: params.userId,
+    }),
+  });
+  let body = await raw.json();
+  console.log(body);
+  return body;
+}

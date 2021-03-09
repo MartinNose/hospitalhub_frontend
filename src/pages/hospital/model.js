@@ -1,8 +1,17 @@
-import { addFakeList, queryFakeList, removeFakeList, updateFakeList } from './service';
+import {
+  addFakeList,
+  queryFakeList,
+  removeFakeList,
+  updateFakeList,
+  registration,
+} from './service';
 const Model = {
   namespace: 'hospital',
   state: {
     list: [],
+    hosInfo: [],
+    filter: [],
+    regRes: false,
   },
   effects: {
     *fetch({ payload }, { call, put }) {
@@ -23,25 +32,27 @@ const Model = {
     },
 
     *submit({ payload }, { call, put }) {
-      let callback;
-
-      if (payload.id) {
-        callback = Object.keys(payload).length === 1 ? removeFakeList : updateFakeList;
-      } else {
-        callback = addFakeList;
-      }
-
-      const response = yield call(callback, payload); // post
-
+      const response = yield call(registration, payload.doctor); // post
+      console.log('damn');
       yield put({
-        type: 'queryList',
+        type: 'regRes',
         payload: response,
       });
     },
   },
   reducers: {
+    regRes(state, action) {
+      console.log(action);
+      return { ...state, regRes: action.payload.status === 'success' };
+    },
+
     queryList(state, action) {
-      return { ...state, info: action.payload };
+      return { ...state, hosInfo: action.payload };
+    },
+
+    select(state, action) {
+      console.log(action.payload);
+      return { ...state, filter: action.payload.category };
     },
 
     appendList(
@@ -50,7 +61,7 @@ const Model = {
       },
       action,
     ) {
-      return { ...state, list: state.list.concat(action.payload) };
+      return { ...state, list: state.list.concat(action.payload), filter: action.payload };
     },
   },
 };
