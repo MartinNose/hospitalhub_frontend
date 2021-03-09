@@ -14,6 +14,7 @@ const Model = {
     *login({ payload }, { call, put }) {
       const response = yield call(AccountLogin, payload);
       // window.localStorage['token'] = response.json().
+      console.log(response);
       yield put({
         type: 'changeLoginStatus',
         payload: response,
@@ -63,8 +64,8 @@ const Model = {
   reducers: {
     changeLoginStatus(state, { payload }) {
       console.log(payload);
-      setAuthority(payload.tag);
-      return { ...state, status: payload.status, type: payload.tag };
+      setAuthority(payload.tag === 'doctor' ? 'admin' : 'user');
+      return { ...state, status: payload.status, type: payload.type };
     },
   },
 };

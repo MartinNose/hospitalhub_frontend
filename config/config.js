@@ -84,6 +84,10 @@ export default defineConfig({
               component: './hospital',
             },
             {
+              path: '/diagnos',
+              component: './diagnos',
+            },
+            {
               name: 'account',
               icon: 'user',
               path: '/account',
@@ -92,6 +96,7 @@ export default defineConfig({
                   path: '/',
                   redirect: '/account/center',
                 },
+
                 {
                   name: 'center',
                   icon: 'smile',
