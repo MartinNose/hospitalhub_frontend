@@ -25,10 +25,7 @@ class Settings extends Component {
         />
       ),
       binding: (
-        <FormattedMessage
-          id="accountandsettings.menuMap.binding"
-          defaultMessage="Account Binding"
-        />
+        <FormattedMessage id="accountandsettings.menuMap.binding" defaultMessage="历史订单" />
       ),
       notification: (
         <FormattedMessage
