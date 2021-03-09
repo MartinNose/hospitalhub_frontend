@@ -78,6 +78,8 @@ const GlobalHeaderRight = (props) => {
         // ]} // onSearch={value => {
         //   //console.log('input', value);
         // }}
+        defaultOpen={true}
+        open={true}
       />
       <NoticeIconView />
       <Avatar menu />
@@ -86,7 +88,13 @@ const GlobalHeaderRight = (props) => {
           <Tag color={ENVTagColor[REACT_APP_ENV]}>{REACT_APP_ENV}</Tag>
         </span>
       )}
-      <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+      <Modal
+        title="您的诊断结果是——"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        width={600}
+      >
         <Typography>
           <Title>诊断结果</Title>
           <Paragraph>{result}</Paragraph>
