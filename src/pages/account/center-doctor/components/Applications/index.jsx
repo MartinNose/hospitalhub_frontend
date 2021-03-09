@@ -41,34 +41,25 @@ const Applications = (props) => {
   const itemMenu = (
     <Menu>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.alipay.com/">
-          1st menu item
+        <a target="_blank" rel="noopener noreferrer" href="/diagnos">
+          开处方
         </a>
       </Menu.Item>
       <Menu.Item>
         <a target="_blank" rel="noopener noreferrer" href="https://www.taobao.com/">
-          2nd menu item
+          预约就诊
         </a>
       </Menu.Item>
       <Menu.Item>
         <a target="_blank" rel="noopener noreferrer" href="https://www.tmall.com/">
-          3d menu item
+          个人档案查询
         </a>
       </Menu.Item>
     </Menu>
   );
 
   const CardInfo = ({ activeUser, newUser }) => (
-    <div className={stylesApplications.cardInfo}>
-      <div>
-        <p>活跃用户</p>
-        <p>{activeUser}</p>
-      </div>
-      <div>
-        <p>新增用户</p>
-        <p>{newUser}</p>
-      </div>
-    </div>
+    <div className={stylesApplications.cardInfo}>候诊中....</div>
   );
 
   return (
@@ -109,7 +100,12 @@ const Applications = (props) => {
                 </Dropdown>,
               ]}
             >
-              <Card.Meta avatar={<Avatar size="small" src={item.avatar} />} title={item.title} />
+              <Card.Meta
+                avatar={
+                  <Avatar size="small" src="https://static.thenounproject.com/png/363640-200.png" />
+                }
+                title={item.title}
+              />
               <div className={stylesApplications.cardItemContent}>
                 <CardInfo
                   activeUser={formatWan(item.activeUser)}

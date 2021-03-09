@@ -39,7 +39,7 @@ const menuDataRender = (menuList) =>
 
 const defaultFooterDom = (
   <DefaultFooter
-    copyright={`${new Date().getFullYear()} 蚂蚁集团体验技术部出品`}
+    copyright={`${new Date().getFullYear()} Hospital Hub开发团队出品`}
     links={[
       {
         key: 'Hospital Hub',
