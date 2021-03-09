@@ -7,7 +7,7 @@ export async function queryFakeList(params) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: qs.stringify({ token: '332c87b55610425b928acd5d5b80e818' }),
+    body: qs.stringify({ token: '' }),
     // new URLSearchParams({'token':'dd8867a006af40b9b5ad62f71babf8d9'})
   });
   let body = await raw.json();

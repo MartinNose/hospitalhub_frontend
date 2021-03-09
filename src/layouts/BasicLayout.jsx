@@ -1,5 +1,5 @@
 /**
- * Ant Design Pro v4 use `@ant-design/pro-layout` to handle Layout.
+ * Hospital Hub Pro v4 use `@ant-design/pro-layout` to handle Layout.
  * You can view component api by:
  * https://github.com/ant-design/ant-design-pro-layout
  */
@@ -42,8 +42,8 @@ const defaultFooterDom = (
     copyright={`${new Date().getFullYear()} 蚂蚁集团体验技术部出品`}
     links={[
       {
-        key: 'Ant Design Pro',
-        title: 'Ant Design Pro',
+        key: 'Hospital Hub',
+        title: 'Hospital Hub',
         href: 'https://pro.ant.design',
         blankTarget: true,
       },
@@ -54,8 +54,8 @@ const defaultFooterDom = (
         blankTarget: true,
       },
       {
-        key: 'Ant Design',
-        title: 'Ant Design',
+        key: 'Hospital Hub',
+        title: 'Hospital Hub',
         href: 'https://ant.design',
         blankTarget: true,
       },

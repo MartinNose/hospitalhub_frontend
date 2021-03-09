@@ -1,6 +1,6 @@
 export default {
   'pages.layouts.userLayout.title':
-    'Ant Design is the most influential web design specification in Xihu district',
+    'Hospital Hub is the most influential hospital registeration framework in Xihu district',
   'pages.login.accountLogin.tab': 'Account Login',
   'pages.login.accountLogin.errorMessage': 'Incorrect username/password（admin/ant.design)',
   'pages.login.username.placeholder': 'Username: admin or user',
