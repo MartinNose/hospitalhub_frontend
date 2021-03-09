@@ -20,6 +20,7 @@ export async function AccountLogin(params) {
   return await fetch(baseUrl + '/login', {
     method: 'POST',
     body: qs.stringify({ accountId: userName, encodedPassword: window.btoa(password) }),
+    // body: JSON.stringify({ accountId: userName, encodedPassword: window.btoa(password) }),
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
